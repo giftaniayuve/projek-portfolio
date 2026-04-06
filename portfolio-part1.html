@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio - Giftania Yuve</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+/* dari ai dan yt */
+:root {
+  --bg: #1a1a2e;
+  --bg2: #16213e;
+  --text: #eee;
+  --text-muted: #aaa;
+  --border: #333;
+  --card-bg: #841869bb;
+  --nav-bg: rgba(26,26,46,0.9);
+  --input-bg: rgba(255,255,255,0.06);
+  --input-border: rgba(255,255,255,0.15);
+}
+/* dari ai */
+html.light {
+  --bg: #f5f5f5;
+  --bg2: #e8e8f0;
+  --text: #111;
+  --text-muted: #555;
+  --border: #ccc;
+  --card-bg: #a40d9a9b;
+  --nav-bg: rgba(245,245,245,0.9);
+  --input-bg: rgba(0,0,0,0.05);
+  --input-border: rgba(0,0,0,0.2);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--nav-bg);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.logo { 
+  font-size: 24px; 
+  font-weight: bold; 
+  color: var(--text);
+ }
+
+
+.logo span { 
+  color: #e84393; 
+}
+
+.nav-links { 
+  display: flex; 
+  gap: 20px; 
+  align-items: center; 
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: 0.3s;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.nav-links a:hover { 
+  background: var(--border); 
+  color: var(--text); 
+}
+
+.theme-toggle {
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  background-color: #d63384;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  flex-shrink: 0;
+}
+
+.toggle {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #4b0935;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: left .25s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+/* dibantu ai setengah */
+.moon { 
+  display: block; 
+}
+
+.sun { 
+  display: none; 
+}
+
+html.light .moon { 
+  display: none; 
+}
+
+html.light .sun { 
+  display: block; 
+  
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 20px;
+}
+.avatar img{
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  background: linear-gradient(145deg, #c97ba7, #8b6ea0);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  object-fit: cover;
+}
+.hero h1 { 
+  font-size: 48px; 
+  margin: 15px 0; 
+}
+
+.hero p { 
+  color: var(--text-muted); 
+  max-width: 500px; 
+  margin-bottom: 20px; 
+  font-size: 16px; 
+}
+
+.btn {
+  padding: 12px 30px;
+  border-radius: 25px;
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.btn-primary { 
+  background: #e84393; 
+  color: white; 
+}
+
+.btn-primary:hover { 
+  background: #d63384; }
+
+.about {
+  padding: 80px 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.about h2 { 
+  font-size: 40px; 
+  text-align: center; 
+  margin-bottom: 40px; 
+}
+
+.about-content { 
+  display: grid; 
+  grid-template-columns: 1fr 2fr; 
+  gap: 40px; 
+}
+
+.about-img img{
+  width: 100%;
+  height: 300px;
+  border-radius: 15px;
+  background: linear-gradient(160deg, #8b6ea0, #c97ba7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  object-fit: cover;
+}
+
+.about-text p { 
+  color: var(--text-muted); 
+  margin-bottom: 20px; 
+  line-height: 1.8; 
+  font-size: 15px; }
+
+.info-grid { 
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 15px; 
+  margin-top: 20px; 
+}
+
+.info-box {
+  background: var(--bg2);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.info-box h4 { 
+  margin-bottom: 5px; 
+  font-size: 14px; 
+}
+
+.info-box p { 
+  color: var(--text-muted); 
+  font-size: 13px; 
+}
+
+.services {
+  text-align: center;
+  padding: 112px 5%;
+  transition: background 0.4s ease;
+}
+
+.services-subtitle { 
+  color: var(--text-muted); 
+  margin-bottom: 8px; 
+  font-size: 15px; 
+}
+
+.services-title {
+  font-size: 32px; 
+  margin-bottom: 16px; 
+}
+
+.services-sub { 
+  color: var(--text-muted); 
+  max-width: 600px; 
+  margin: 0 auto; 
+  font-size: 15px; }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 29px;
+  margin-top: 48px;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.services-card {
+  background-color: var(--card-bg);
+  padding: 40px 29px;
+  border-radius: 22px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: left;
+  border: 1px solid #a117b79a;
+}
+
+.services-card:hover { 
+  transform: translateY(-5px); 
+}
+
+.services-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  font-size: 26px;
+  background-color: #8b6ea0;
+}
+
+.services-card h2 {
+  margin-bottom: 14px;
+  font-size: 17px; 
+  color: #fff; 
+}
+
+.services-card p { 
+  font-size: 14px; 
+  margin-bottom: 24px; 
+  line-height: 1.6; 
+  color: rgba(255,255,255,0.8); 
+}
+
+.read-more { text-decoration: none;
+   font-weight: 500; 
+   font-size: 14px; 
+   color: #FFFFFF; 
+  }
+
+.my.work { 
+  padding: 80px 5%; 
+  text-align: center; 
+}
+
+.my.work p.work-sub { 
+  color: var(--text-muted); 
+  margin-bottom: 8px; 
+  font-size: 15px; 
+}
+
+.my.work h1 { 
+  font-size: 40px; 
+  margin-bottom: 16px; 
+}
+
+.my.work p.work-desc { 
+  color: var(--text-muted); 
+  max-width: 600px; 
+  margin: 0 auto 48px; 
+  font-size: 15px; 
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.work-card {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  border: 2px solid var(--border);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.work-card:hover { 
+  transform: translateY(-6px); 
+  box-shadow: 0 15px 35px rgba(232,67,147,0.3);
+ }
+
+.work-card img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  display: block; 
+  transition: transform 0.4s; 
+}
+
+.work-card:hover img { 
+  transform: scale(1.08); 
+}
+
+.work-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(232,67,147,0.85), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: flex-end;
+  padding: 19px;
+}
+
+.work-card:hover .work-overlay { 
+  opacity: 1; 
+}
+
+.work-overlay span { 
+  color: #fff; 
+  font-weight: bold; 
+  font-size: 14px; 
+}
+
+.work-img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2a2a4a 0%, #1a1a3e 50%, #16213e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+}
+
+.work-hidden {
+   display: none; 
+  }
+
+.btn-show-more {
+  margin-top: 36px;
+  padding: 12px 36px;
+  border-radius: 25px;
+  background: transparent;
+  color: var(--text);
+  border: 2px solid #e84393;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-show-more:hover {
+   background: #e84393; color: #fff; 
+  }
+
+.contact {
+  padding: 100px 5%;
+  text-align: center;
+  background: var(--bg2);
+}
+.contact-sub { 
+  color: var(--text-muted); font-size: 15px; margin-bottom: 10px; 
+}
+.contact h2 {
+   font-size: 44px; margin-bottom: 16px; font-weight: 700;
+   }
+.contact-desc {
+   color: var(--text-muted); font-size: 15px; max-width: 560px; margin: 0 auto 48px; line-height: 1.7;
+   }
+.contact-form {
+  max-width: 580px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contact-row { 
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+ }
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus { 
+  border-color: #e84393; 
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+   color: var(--text-muted); 
+  }
+.contact-form textarea {
+   height: 180px; resize: vertical; 
+  }
+.captcha-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 14px 20px;
+  width: fit-content;
+  gap: 60px;
+}
+.captcha-left {
+   display: flex; align-items: center; gap: 12px;
+   }
+.captcha-label {
+   font-size: 15px; color: #333; 
+  }
+.captcha-right {
+   display: flex; flex-direction: column; align-items: center; 
+  }
+.captcha-logo {
+   font-size: 22px;
+   }
+.captcha-brand { 
+  font-size: 11px; color: #555; font-weight: 600; 
+}
+.captcha-links {
+   font-size: 10px; color: #888; 
+  }
+.btn-submit {
+  padding: 14px 40px;
+  border-radius: 30px;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px auto 0;
+}
+.btn-submit:hover { opacity: 0.85; transform: translateY(-2px); }
+
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 40px 5%;
+  text-align: center;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.footer-logo {
+   font-size: 24px; font-weight: bold; 
+  }
+.footer-logo span {
+   color: #e84393;
+   }
+.footer-links {
+   display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
+   }
+.footer-links a {
+   color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.3s;
+   }
+.footer-links a:hover {
+   color: #e84393; 
+  }
+.footer-socials {
+   display: flex; gap: 16px;
+   }
+.footer-socials a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  text-decoration: none;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.footer-socials a:hover { 
+  border-color: #e84393; transform: translateY(-3px);
+ }
+.footer-copy {
+   color: var(--text-muted); font-size: 13px; 
+  }
+
+  /* ai */
+
+  .hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 1024px) {
+  .services-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+  .work-grid { 
+    grid-template-columns: repeat(3, 1fr);
+   }
+}
+@media (max-width: 768px) {
+  .about-content {
+     grid-template-columns: 1fr; 
+    }
+  .hero h1 { 
+    font-size: 32px;
+   }
+  .services-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+  .work-grid { 
+    grid-template-columns: repeat(2, 1fr);
+   }
+  .contact-row { 
+    grid-template-columns: 1fr; 
+  }
+}
+/* ai */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 20px 20px;
+    gap: 4px;
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 10px 15px;
+  }
+
+  .theme-toggle {
+    margin-top: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .services-grid {
+     grid-template-columns: 1fr;
+     }
+  .work-grid { 
+    grid-template-columns: 1fr; 
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">nia<span>.</span></div>
+  <!-- ai -->
+  <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#my-work">Portfolio</a>
+    <a href="#contact">Contact</a>
+    <button class="theme-toggle" id="theme-toggle">
+      <div class="toggle">
+        <span class="sun">☀️</span>
+        <span class="moon">🌙</span>
+      </div>
+    </button>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="avatar"><img src="WIN_20260303_08_13_43_Pro.jpg" alt=""></div>
+  <p>Hello! I'm</p>
+  <h1>Giftania yuve</h1>
+  <p>Frontend developer from Palembang, Indonesia with 2 years of experience, focused on building stylish, modern, and user-friendly web interfaces.
+</p>
+  <div>
+    <button class="btn btn-primary">Download CV</button>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <h2>About me</h2>
+  <div class="about-content">
+    <div class="about-img"><img src="WIN_20260303_08_13_43_Pro.jpg" alt="" srcset=""></div>
+    <div class="about-text">
+      <p>Gitania Yuve — a frontend developer based in Palembang, Indonesia, with 2 years of experience crafting stylish and modern web interfaces. I enjoy building responsive websites, web services, and online stores that feel clean, functional, and user-friendly.
+</p>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>📍 Location</h4>
+          <p>Los Angeles, USA</p>
+        </div>
+        <div class="info-box">
+          <h4>💼 Experience</h4>
+          <p>10+ Years</p>
+        </div>
+        <div class="info-box">
+          <h4>🎓 Education</h4>
+          <p>B.Tech in Computer Science</p>
+        </div>
+        <div class="info-box">
+          <h4>📁 Projects</h4>
+          <p>Built more than 5 projects</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <p class="services-subtitle">What I Offer</p>
+  <h2 class="services-title">My Services</h2>
+  <p class="services-sub">I am a frontend developer based in Palembang, Indonesia, with 2 years of experience. I design and develop services for customers, specializing in creating stylish, modern websites, web services, and online stores that are clean, functional, and user-friendly.
+</p>
+  <div class="services-grid">
+    <div class="services-card">
+      <div class="services-icon">💻</div>
+      <h2>Web Design</h2>
+      <p>Creating responsive and high-converting layouts that look beautiful on every screen size and resolution.</p>
+      <a href="#" class="read-more">Read More ></a>
+    </div>
+    <div class="services-card">
+      <div class="services-icon">📱</div>
+      <h2>Mobile App</h2>
+      <p>Developing intuitive and engaging mobile applications for iOS and Android platforms.</p>
+      <a href="#" class="read-more">Read More ></a>
+    </div>
+    <div class="services-card">
+      <div class="services-icon">🖼️</div>
+      <h2>UI/UX Design</h2>
+      <p>Designing user-friendly interfaces and experiences that enhance usability and satisfaction.</p>
+      <a href="#" class="read-more">Read More ></a>
+    </div>
+    <div class="services-card">
+      <div class="services-icon">🖌️</div>
+      <h2>Graphics Design</h2>
+      <p>Creating visually appealing graphics and assets for various media and platforms.</p>
+      <a href="#" class="read-more">Read More ></a>
+    </div>
+  </div>
+</section>
+
+<section class="my work" id="my-work">
+  <p class="work-sub">My Portfolio</p>
+  <h1>My Latest Work</h1>
+  <p class="work-desc">Welcome to my web development portfolio! Explore a collection of projects showcasing my expertise in front-end development.</p>
+  <div class="work-grid">
+    <div class="work-card">
+      <div class="work-img-placeholder"><a href="jam.html"><img src="Screenshot 2026-03-10 073723.png" alt=""></a></div>
+      <div class="work-overlay"><a href="jam.html"><span>jam</span></a></div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-img-placeholder"><a href="5 agustus/index.html"><img src="Screenshot 2026-03-10 070952.png" alt=""></a></div>
+      <div class="work-overlay"><a href="5 agustus/index.html"><span>Konversi satuan</span></a></div>
+      
+    </div>
+    <div class="work-card">
+      <div class="work-img-placeholder"><a href="3 agustus/index 2.html"><img src="Screenshot 2026-03-10 071817.png" alt=""></a></div>
+      <div class="work-overlay"><a href="3 agustus/index 2.html"><span>Konversi suhu</span></a></div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-img-placeholder"><a href="03 november/index 1.html"><img src="Screenshot 2026-03-10 070819.png" alt=""></a></div>
+      <div class="work-overlay"><a href="03 november/index 1.html"><span>password generator</span></a></div>
+    </div>
+    <div class="work-card work-hidden">
+      <div class="work-img-placeholder"><a href="remedial asas coding/index.html"><img src="Screenshot 2026-03-10 071639.png" alt=""></a></div>
+      <div class="work-overlay"><a href="remedial asas coding/index.html"><span>characther counter</span></a></div>
+    </div>
+    <div class="work-card work-hidden">
+      <div class="work-img-placeholder"><a href="30 september/inde.html"><img src="Screenshot 2026-03-10 071539.png " alt=""></a></div>
+      <div class="work-overlay"><a href="30 september/inde.html"><span>fotobox</span></a></div>
+    </div>
+    <div class="work-card work-hidden">
+      <div class="work-img-placeholder"><a href="19 agustus/index.html"><img src="Screenshot 2026-03-10 071127.png " alt=""></a></div>
+      <div class="work-overlay"><a href="19 agustus/index.html"><span>tebak angka</span></a></div>
+    </div>
+    <div class="work-card work-hidden">
+      <div class="work-img-placeholder"><a href="26 agustus/index.html"><img src="Screenshot 2026-03-10 071410.png" alt=""></a></div>
+      <div class="work-overlay"><a href="26 agustus/index.html"><span>playlist</span></a></div>
+    </div>
+    <div class="work-card work-hidden">
+      <div class="work-img-placeholder"><a href="25 agustus/index.html"><img src="Screenshot 2026-03-10 071302.png" alt=""></a></div>
+      <div class="work-overlay"><a href="25 agustus/index.html"><span>Kalkulator</span></a></div>
+    </div>
+    <div class="work-card work-hidden">
+      <div class="work-img-placeholder"><a href="04 november/index.HTML"><img src="Screenshot 2026-03-10 070850.png" alt=""></a></div>
+      <div class="work-overlay"><a href="04 november/index.HTML"><span>drawing app</span></a></div>
+    </div>
+    <div class="work-card work-hidden">
+      <div class="work-img-placeholder"><a href="8 september/index.html"><img src="Screenshot 2026-03-10 070931.png " alt=""></a></div>
+      <div class="work-overlay"><a href="8 september/index.html"><span>rumah sakit</span></a></div>
+    </div>
+    <div class="work-card work-hidden">
+      <div class="work-img-placeholder"><a href="20 oktober/index.html"><img src="Screenshot 2026-03-10 071209.png" alt=""></a></div>
+      <div class="work-overlay"><a href="20 oktober/index.html"><span>kuis</span></a></div>
+    </div>
+  </div>
+  <button class="btn-show-more" id="show-more-btn">Show More ↓</button>
+</section>
+
+<section class="contact" id="contact">
+  <p class="contact-sub">Connect with me</p>
+  <h2>Get in touch</h2>
+  <p class="contact-desc">I'd love to hear from you! If you have any questions, comments or feedback, please use the form below.</p>
+  <div class="contact-form">
+    <div class="contact-row">
+      <input type="text" placeholder="Enter your name">
+      <input type="email" placeholder="Enter your email">
+    </div>
+    <textarea placeholder="Enter your message"></textarea>
+    <div class="captcha-box">
+      <div class="captcha-left">
+        <div class="captcha-checkbox"><input type="checkbox" class="captcha-checkbox-1"></div>
+        <span class="captcha-label">I am human</span>
+      </div>
+      <div class="captcha-right">
+        <div class="captcha-logo">🛡️</div>
+        <div class="captcha-brand">hCaptcha</div>
+        <div class="captcha-links">Privacy · Terms</div>
+      </div>
+    </div>
+    <button class="btn-submit">Submit now →</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">nia<span>.</span></div>
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#my-work">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-socials">
+      <a href="#">🐦</a>
+      <a href="#">💼</a>
+      <a href="#">🐙</a>
+      <a href="#">📸</a>
+    </div>
+    <p class="footer-copy">© 2024 Giftania Yuve. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+const showMoreBtn = document.getElementById('show-more-btn');
+const hiddenCards = document.querySelectorAll('.work-hidden');
+let expanded = false;
+
+showMoreBtn.addEventListener('click', () => {
+  expanded = !expanded;
+  hiddenCards.forEach(card => {
+    card.style.display = expanded ? 'block' : 'none';
+  });
+  showMoreBtn.textContent = expanded ? 'Show Less ↑' : 'Show More ↓';
+});
+
+const html = document.documentElement;
+const themeBtn = document.getElementById('theme-toggle');
+
+if (localStorage.theme === 'light') html.classList.add('light');
+
+themeBtn.addEventListener('click', () => {
+  html.classList.toggle('light');
+  localStorage.theme = html.classList.contains('light') ? 'light' : 'dark';
+});
+
+// ai
+
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const navLinks = document.querySelector('.nav-links');
+
+hamburgerBtn.addEventListener('click', () => {
+  hamburgerBtn.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburgerBtn.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>
